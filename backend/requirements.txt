@@ -1,0 +1,16 @@
+fastapi[all]
+uvicorn[standard]
+python-jose[cryptography]
+authlib
+httpx
+python-dotenv
+auth0_fastapi
+PyPDF2
+sqlmodel
+pgvector
+psycopg
+psycopg_binary
+openfga_sdk
+langchain_text_splitters
+langchain_openai
+langchain_postgres

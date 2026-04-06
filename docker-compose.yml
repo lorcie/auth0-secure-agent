@@ -1,0 +1,76 @@
+services:
+#  postgres:
+#    image: pgvector/pgvector:pg17
+#    container_name: postgres_pgvector
+#    environment:
+#      POSTGRES_DB: ai_documents_db
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    restart: unless-stopped
+
+  backend:
+    container_name: auth0-secure-agent-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env.docker
+    networks:
+      - applications-networks
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    depends_on:
+      - langgraphapi
+
+  langgraphapi:
+    container_name: auth0-secure-agent-langgraph-api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.langgraph
+    ports:
+      - "5436:5436"
+    env_file:
+      - ./backend/.env.docker
+    networks:
+      - applications-networks
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+  frontend:
+    container_name: auth0-secure-agent-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./frontend/.env.docker
+    depends_on:
+      - backend
+    networks:
+      - applications-networks
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+volumes:
+  postgres_data:
+
+networks:
+  applications-networks:
+    name: applications-networks
+    external: true

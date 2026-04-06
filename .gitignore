@@ -1,0 +1,22 @@
+__pycache__
+app.egg-info
+*.pyc
+.mypy_cache
+.coverage
+htmlcov
+.cache
+.venv
+.env
+.env.docker
+.env.example
+
+node_modules
+# gcloud credentials
+gcloud-credentials.json
+
+.langgraph_api
+
+# langchain
+.langgraph_api
+
+assets

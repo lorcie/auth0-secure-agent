@@ -1,0 +1,18 @@
+FROM langchain/langgraph-api:3.13
+
+WORKDIR /app
+
+# Copy your agents and langgraph.json
+COPY . /app
+
+# Install local agent package (or install requirements)
+RUN pip install -e . \
+    && pip install langgraph langchain
+
+# Use LANGSERVE_GRAPHS from langgraph.json (example; you may also generate it via CLI)
+# Or let langgraph's build step in `langgraph.json` fill this in automatically.
+ENV LANGSERVE_GRAPHS='{"agent":"/app/agents/assistant0.py:agent"}'
+
+EXPOSE 54367
+
+CMD ["python", "-m", "langgraph", "dev"]
