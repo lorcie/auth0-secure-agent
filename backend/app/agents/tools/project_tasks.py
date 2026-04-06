@@ -15,12 +15,9 @@ with open("/app/app/agents/tools/project_tasks_list.json") as json_file:
     print(PROJECT_TASKS)
 
 def get_task_details_tool_fn(assignee: Any) -> Dict[str, Any]:
-    """
-    Retrieves the details of a specific task by its assignee.
-
+    """Retrieves the details of a specific task by its assignee.
     Args:
         assignee: The assignee of the task.
-
     Returns:
         A dictionary with the task's details (title, project, assignee, status, due date)
         or an empty dictionary if the task is not found.
