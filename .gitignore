@@ -19,4 +19,5 @@ gcloud-credentials.json
 # langchain
 .langgraph_api
 
-assets
+*.excalidraw
+*.draw

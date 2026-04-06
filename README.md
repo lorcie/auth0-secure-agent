@@ -22,19 +22,23 @@ The project is divided into two parts:
 - `backend/` contains the backend code for the Web app and API written in Python using FastAPI.
 - `frontend/` contains the frontend code for the Web app written in React as a Vite SPA.
 
-### Setup the backend
+### Setup the environment variables
 
 ```bash
 cd backend
+cp env.docker.template .env.docker
 ```
 
-Next, you'll need to set up environment variables in your repo's `.env` file. Copy the `.env.example` file to `.env`.
+```bash
+cd frontend
+cp env.docker.template .env.docker
+```
 
-To start with the basic examples, you'll just need to add your OpenAI API key and Auth0 credentials.
+Next, you'll need to set up environment variables in your repo sub-folders backend and frontend.
 
-- To start with the application, you'll just need to add your Google Gemini API key and Auth0 credentials for the Web app.
+To start with the application, you'll just need to add your Google Gemini API key and Auth0 credentials for the Web app.
+
   - You can setup a new Auth0 tenant with an Auth0 Web App and Token Vault following the Prerequisites instructions [here](https://auth0.com/ai/docs/get-started/user-authentication).
-
 
 Review the docker-compose.yml file to customize settings ( ./backend/.env.docker and ./frontend/.env.docker files ) about particularly :
 
@@ -49,7 +53,7 @@ Now you're ready to start the Full Stack Application:
 docker compose up -d
 ```
 
-Now you're ready to run the development server:
+Here are instruction to stop the development services:
 
 ```bash
 # stop the application components
@@ -62,6 +66,7 @@ This will start a React vite server on port 5173.
 
 ![A streaming conversation between the user and the AI](./public/images/home-page.png)
 
+## Screenshots
 
 ## License
 
