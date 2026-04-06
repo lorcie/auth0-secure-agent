@@ -68,6 +68,41 @@ This will start a React vite server on port 5173.
 
 ## Screenshots
 
+Architecture
+
+![Architecture](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-architecture.png?raw=true)
+
+
+![Frontend HomePage](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-homepage.png?raw=true)
+
+
+![Frontend LoginPage](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-loginpage.png?raw=true)
+
+
+![Frontend Authorization](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-authorization.png?raw=true)
+
+
+![Frontend Google SignIn](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-google-sign-in.png?raw=true)
+
+
+![Frontend Google AUth0 Consent](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-google-auth0-consent.png?raw=true)
+
+
+![Frontend Auth0 authorize after Google Consent](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-auth0-authorize-after-google-consent.png?raw=true)
+
+
+![Frontend ChatPage](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-chatpage.png?raw=true)
+
+
+![Frontend Chat Tools Session](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-chat-tools-session.png?raw=true)
+
+
+![Frontend Chat Google Id Session](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-chat-google-id-session.png?raw=true)
+
+
+![Frontend Docker Containers](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-docker-containers.png?raw=true)
+
+
 ## License
 
 This project is open-sourced under the MIT License - see the [LICENSE](LICENSE) file for details.
