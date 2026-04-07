@@ -16,16 +16,16 @@ export default function useAuth() {
 }
 
 export function getLoginUrl() {
-  const baseUrl = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+  const baseUrl = import.meta.env.VITE_API_HOST ?? "http://localhost:8000";
   return `${baseUrl}/auth/login?returnTo=${window.location}`;
 }
 
 export function getSignupUrl() {
-  const baseUrl = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+  const baseUrl = import.meta.env.VITE_API_HOST ?? "http://localhost:8000";
   return `${baseUrl}/auth/login?screen_hint=signup`;
 }
 
 export function getLogoutUrl() {
-  const baseUrl = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+  const baseUrl = import.meta.env.VITE_API_HOST ?? "http://localhost:8000";
   return `${baseUrl}/auth/logout?returnTo=${window.location.origin}`;
 }

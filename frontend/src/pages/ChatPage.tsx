@@ -46,8 +46,9 @@ export default function ChatPage() {
       return;
     }
 
+    const baseUrl = import.meta.env.VITE_API_HOST ?? "http://localhost:8000";
     // Or call server-side endpoint to verify (works for HttpOnly cookies too)
-    fetch("http://localhost:8000/auth/me", { credentials: "include" })
+    fetch(baseUrl+"/auth/me", { credentials: "include" })
       .then(r => r.json())
       .then(data => setMe({ source: "/auth/me", ...data }))
       .catch(err => console.error(err));
@@ -85,12 +86,11 @@ export default function ChatPage() {
   }
 
   const user1 = me?.user
-  console.log('user:'+user1)
+  //console.log('user:'+user1)
   var name1
   if (user1) {
     const userStr = String(user1);
-    console.log('userStr:'+userStr)
-    console.log('useStr-filter'+(userStr.replaceAll("None","''").replaceAll("True", "'true'").replaceAll("'","\"")))
+    //console.log('userStr:'+userStr)
     name1 = JSON.parse(userStr.replaceAll("None","''").replaceAll("True", "'true'").replaceAll("'","\"")).name
   }
   else
