@@ -99,7 +99,7 @@ Architecture
 ![Frontend Google SignIn](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-google-sign-in.png?raw=true)
 
 
-![Frontend Google AUth0 Consent](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-google-auth0-consent.png?raw=true)
+![Frontend Google Auth0 Consent](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-google-auth0-consent.png?raw=true)
 
 
 ![Frontend Auth0 authorize after Google Consent](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-frontend-auth0-authorize-after-google-consent.png?raw=true)
@@ -115,6 +115,9 @@ Architecture
 
 
 ![Frontend Docker Containers](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-docker-containers.png?raw=true)
+
+
+![Google Cloud Run Services](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-google-cloud-run-services.png?raw=true)
 
 
 ## License
