@@ -15,7 +15,7 @@ function parseMarkdownIntoBlocks(markdown: unknown): string[] {
       ? markdown
       : markdown == null
         ? ""
-        : (markdown.find(e => typeof e !== 'undefined')).text;
+        : (Object.values(markdown).find((v) => typeof v !== 'undefined')?.text); // use optional chaining);
         //String(markdown);
 //  console.log("tokens text="+text+ " md="+JSON.stringify(markdown))
   const tokens = marked.lexer(text);

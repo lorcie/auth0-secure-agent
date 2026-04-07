@@ -34,7 +34,13 @@ cd frontend
 cp env.docker.template .env.docker
 ```
 
-Next, you'll need to set up environment variables in your repo sub-folders backend and frontend.
+Next, you'll need to set up environment variables  (file .env.docker) in your repo sub-folders backend and frontend.
+
+The application requires also Google Cloud json key (file name gcloud-credentials.json to save inside backend folder) to be exported from Google Cloud after adding Vertex AI user role.
+
+```bash
+cp gcloud-credentials.json backend/
+```
 
 To start with the application, you'll just need to add your Google Gemini API key and Auth0 credentials for the Web app.
 
@@ -42,7 +48,8 @@ To start with the application, you'll just need to add your Google Gemini API ke
 
 Review the docker-compose.yml file to customize settings ( ./backend/.env.docker and ./frontend/.env.docker files ) about particularly :
 
-- Your AuthO tenant parameters / urls / Client ID / secret
+- Your AuthO tenant parameters / all callback Urls / Client ID / secret
+- Your Google Profile (ClientId, ClientSecret,...)
 - Your Google Gemini LLM parameters
 - urls and/or ports
 
@@ -51,6 +58,13 @@ Now you're ready to start the Full Stack Application:
 ```bash
 # start the application components
 docker compose up -d
+```
+
+Here are instruction to rebuild the application after any changes about configuration or code set :
+
+```bash
+# stop the application components
+docker compose build
 ```
 
 Here are instruction to stop the development services:

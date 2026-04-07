@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router";
-import { Button } from "@/components/ui/button";
 import UserButton from "@/components/auth0/user-button";
 import { ActiveLink } from "@/components/navbar";
 

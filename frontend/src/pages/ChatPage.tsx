@@ -5,8 +5,32 @@ import { Button } from "@/components/ui/button";
 import useAuth, { getLoginUrl, getSignupUrl } from "@/lib/use-auth";
 import { useEffect, useState } from "react";
 
+
+type Auth0User = {
+  sub: string;                         // subject / user ID
+  name?: string | null;                // full name
+  nickname?: string | null;            // nickname
+  given_name?: string | null;          // first name
+  family_name?: string | null;         // last name
+  picture?: string | null;             // avatar URL
+  email?: string | null;               // email
+  email_verified?: boolean;            // whether email is verified
+  org_id?: string | null;              // organization ID (if any)
+  updated_at?: string;                 // ISO‑8601 datetime string
+  iss?: string;                        // issuer (Auth0 domain)
+  aud?: string;                        // audience (client ID)
+  iat?: number;                        // issued at (timestamp)
+  exp?: number;                        // expires at (timestamp)
+  sid?: string;                        // session ID
+};
+
+type Me = {
+  authenticated: boolean;
+  user: Auth0User | null;
+} | null;
+
 export default function ChatPage() {
- const [me, setMe] = useState(null);
+ const [me, setMe] = useState<Me>(null);
 
   useEffect(() => {
     // Try reading cookie directly (works only if httponly=False)
@@ -18,7 +42,7 @@ export default function ChatPage() {
       }).filter(([k]) => k)
     );
     if (cookies.user) {
-      setMe({ source: "document.cookie", user: cookies.user });
+      setMe({authenticated: true, user: cookies.user});
       return;
     }
 
@@ -32,7 +56,7 @@ export default function ChatPage() {
       <h2>Session check</h2>
       <pre>{JSON.stringify(me, null, 2)}</pre>
   </div>
-  const { user, isLoading } = useAuth();
+  const { isLoading } = useAuth();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -61,10 +85,14 @@ export default function ChatPage() {
   }
 
   const user1 = me?.user
-  //console.log('user:'+user1)
+  console.log('user:'+user1)
   var name1
-  if (user1)
-    name1 = JSON.parse(user1.replaceAll("None","''").replaceAll("True", "'true'").replaceAll("'","\"")).name
+  if (user1) {
+    const userStr = String(user1);
+    console.log('userStr:'+userStr)
+    console.log('useStr-filter'+(userStr.replaceAll("None","''").replaceAll("True", "'true'").replaceAll("'","\"")))
+    name1 = JSON.parse(userStr.replaceAll("None","''").replaceAll("True", "'true'").replaceAll("'","\"")).name
+  }
   else
     name1 = ""
   console.log('user:'+name1)
