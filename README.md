@@ -36,7 +36,7 @@ cp env.docker.template .env.docker
 
 Next, you'll need to set up environment variables  (file .env.docker) in your repo sub-folders backend and frontend.
 
-The application requires also Google Cloud json key (file name gcloud-credentials.json to save inside backend folder) to be exported from Google Cloud after adding Vertex AI user role.
+The application requires also Google Cloud json key (file name gcloud-credentials.json to be saved inside backend folder) to be exported from Google Cloud after adding *Vertex AI user* and *Cloud Run invoker*  roles.
 
 ```bash
 cp gcloud-credentials.json backend/
