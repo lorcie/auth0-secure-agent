@@ -12,7 +12,7 @@ htmlcov
 
 node_modules
 # gcloud credentials
-gcloud-credentials.json
+gcloud-credentials*.json
 
 dist
 
