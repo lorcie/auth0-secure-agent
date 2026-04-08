@@ -45,6 +45,7 @@ async def api_route(
                 }
             }
             body = json.dumps(content).encode("utf-8")
+            print(f"body: {body}")
 
             # Stream the response back
             async def stream_response():

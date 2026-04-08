@@ -120,6 +120,8 @@ Architecture
 ![Google Cloud Run Services](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-google-cloud-run-services.png?raw=true)
 
 
+![Google Cloud Run Chat Session](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-google-cloud-run-chat-session.png?raw=true)
+
 ## License
 
 This project is open-sourced under the MIT License - see the [LICENSE](LICENSE) file for details.
