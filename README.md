@@ -122,6 +122,63 @@ Architecture
 
 ![Google Cloud Run Chat Session](https://github.com/lorcie/auth0-secure-agent/blob/main/assets/auth0-secure-agent-google-cloud-run-chat-session.png?raw=true)
 
+## Deployment on Google Cloud Run
+
+set common variables 
+
+```bash
+export AR_REPO=YOUR_GOOGLE_REPO
+export GCP_REGION=YOUR_GOOGLE_REGION
+export GCP_PROJECT=YOUR_PROJECT_ID
+```
+
+### Deployment for LangGraph API
+
+```bash
+export LANGGRAPH_SERVICE_NAME='auth0-secure-agent-langgraph-api'
+export LANGGRAPH_ENV_FILE_PATH='.env.docker'
+
+// go in appropriate subdirectory, this supposes existence of subdirectory ./backend/langgraph-build containing special archive for langraph ai
+cd ./backend
+
+// build langraph api docker image  in langgraph-build sub folder
+gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$LANGGRAPH_SERVICE_NAME" ./langgraph-build
+
+// deploy langraph api on Cloud Run
+gcloud run deploy "$LANGGRAPH_SERVICE_NAME" --port=5436 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$LANGGRAPH_SERVICE_NAME" --env-vars-file $LANGRAPH_ENV_FILE_PATH --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT
+```
+
+### Deployment for Backend (FastAPI)
+
+```bash
+export BACKEND_SERVICE_NAME='auth0-secure-agent-backend'
+export BACKEND_ENV_FILE_PATH='.env.docker'
+
+// go in appropriate subdirectory
+cd ./backend
+
+// build backend docker image
+gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$BACKEND_SERVICE_NAME" .
+
+// deploy backend on Cloud Run
+gcloud run deploy "$BACKEND_SERVICE_NAME" --port=8000 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$BACKEND_SERVICE_NAME" --env-vars-file $ENV_FILE_PATH --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT
+```
+
+### Deployment for Frontend
+
+```bash
+export FRONTEND_SERVICE_NAME='auth0-secure-agent-frontend'
+
+// go in appropriate subdirectory
+cd ./frontend
+
+// build backend docker image
+gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$FRONTEND_SERVICE_NAME" .
+
+// deploy backend on Cloud Run
+gcloud run deploy "$FRONTEND_SERVICE_NAME" --port=8080 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$FRONTEND_SERVICE_NAME" --env-vars-file $ENV_FILE_PATH --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT
+```
+
 ## License
 
 This project is open-sourced under the MIT License - see the [LICENSE](LICENSE) file for details.
