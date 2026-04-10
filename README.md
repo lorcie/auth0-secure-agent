@@ -17,15 +17,17 @@ git clone https://github.com/lorcie/auth0-secure-agent.git
 cd auth0-secure-agent
 ```
 
-The project is divided into two parts:
+The project is divided into several parts:
 
-- `backend/` contains the backend code for the Web app and API written in Python using FastAPI.
+- `backend-fastapi/` contains the backend code for the Web app and API written in Python using FastAPI.
+- `backend-langgraphapi/` contains the backend code for therunning the agent thru Langgraph.
+- `common`contains the shared settings configuration
 - `frontend/` contains the frontend code for the Web app written in React as a Vite SPA.
 
 ### Setup the environment variables
 
+In root folder
 ```bash
-cd backend
 cp env.docker.template .env.docker
 ```
 
@@ -34,12 +36,12 @@ cd frontend
 cp env.docker.template .env.docker
 ```
 
-Next, you'll need to set up environment variables  (file .env.docker) in your repo sub-folders backend and frontend.
+Next, you'll need to set up environment variables  (file .env.docker) in your repo root and frontend.
 
 The application requires also Google Cloud json key (file name gcloud-credentials.json to be saved inside backend folder) to be exported from Google Cloud after adding *Vertex AI user* and *Cloud Run invoker*  roles.
 
 ```bash
-cp gcloud-credentials.json backend/
+cp gcloud-credentials.json backend-langgraphapi/
 ```
 
 To start with the application, you'll just need to add your Google Gemini API key and Auth0 credentials for the Web app.
@@ -139,10 +141,10 @@ export LANGGRAPH_SERVICE_NAME='auth0-secure-agent-langgraph-api'
 export LANGGRAPH_ENV_FILE_PATH='.env.docker'
 
 // go in appropriate subdirectory, this supposes existence of subdirectory ./backend/langgraph-build containing special archive for langraph ai
-cd ./backend
+cd ./backend-langgraphapi
 
 // build langraph api docker image  in langgraph-build sub folder
-gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$LANGGRAPH_SERVICE_NAME" ./langgraph-build
+gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$LANGGRAPH_SERVICE_NAME" .
 
 // deploy langraph api on Cloud Run
 gcloud run deploy "$LANGGRAPH_SERVICE_NAME" --port=5436 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$LANGGRAPH_SERVICE_NAME" --env-vars-file $LANGRAPH_ENV_FILE_PATH --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT
@@ -155,7 +157,7 @@ export BACKEND_SERVICE_NAME='auth0-secure-agent-backend'
 export BACKEND_ENV_FILE_PATH='.env.docker'
 
 // go in appropriate subdirectory
-cd ./backend
+cd ./backend-fastapi
 
 // build backend docker image
 gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$BACKEND_SERVICE_NAME" .
