@@ -1,0 +1,34 @@
+# Dependancies
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+
+.venv
+
+# Git and IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+*.swp
+
+# Fichiers de build locaux
+dist/
+build/
+*.log
+
+# Secrets and  local config
+.env
+.env.local
+*.pem
+*.key
+secrets/
+.npmrc
+.pypirc
+kubeconfig
+
+# Docker (optionall — to exclude in case of remote build)
+# Dockerfile*
+# docker-compose*.yml
+# .dockerignore

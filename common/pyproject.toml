@@ -1,0 +1,7 @@
+[tool.poetry]
+name = "common"
+version = "0.1.0"
+packages = [{include = "common"}]
+
+[tool.poetry.dependencies]
+python = "^3.13"

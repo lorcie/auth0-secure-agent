@@ -12,15 +12,15 @@ services:
 #      - postgres_data:/var/lib/postgresql/data
 #    restart: unless-stopped
 
-  backend:
-    container_name: auth0-secure-agent-backend
+  backend-fastapi:
+    container_name: auth0-secure-agent-backend-1
     build:
-      context: ./backend
-      dockerfile: Dockerfile.backend
+      context: .
+      dockerfile: ./backend-fastapi/Dockerfile.backend
     ports:
       - "8000:8000"
     env_file:
-      - ./backend/.env.docker
+      - .env.docker
     networks:
       - applications-networks
     extra_hosts:
@@ -29,17 +29,17 @@ services:
       - 8.8.8.8
       - 1.1.1.1
     depends_on:
-      - langgraphapi
+      - backend-langgraphapi
 
-  langgraphapi:
-    container_name: auth0-secure-agent-langgraph-api
+  backend-langgraphapi:
+    container_name: auth0-secure-agent-langgraph-api-1
     build:
-      context: ./backend
-      dockerfile: Dockerfile.langgraph
+      context: .
+      dockerfile: ./backend-langgraphapi/Dockerfile.langgraph
     ports:
       - "5436:5436"
     env_file:
-      - ./backend/.env.docker
+      - .env.docker
     networks:
       - applications-networks
     extra_hosts:
@@ -49,7 +49,7 @@ services:
       - 1.1.1.1
 
   frontend:
-    container_name: auth0-secure-agent-frontend
+    container_name: auth0-secure-agent-frontend-1
     build:
       context: ./frontend
       dockerfile: Dockerfile.frontend
@@ -58,7 +58,8 @@ services:
     env_file:
       - ./frontend/.env.docker
     depends_on:
-      - backend
+      - backend-fastapi
+      - backend-langgraphapi
     networks:
       - applications-networks
     extra_hosts:

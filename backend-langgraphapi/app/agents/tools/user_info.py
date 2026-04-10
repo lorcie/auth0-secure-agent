@@ -3,7 +3,7 @@ from langchain_core.tools import StructuredTool
 from langchain_core.runnables.config import RunnableConfig
 from pydantic import BaseModel
 
-from app.core.config import settings
+from common.config import settings
 
 class UserInfoSchema(BaseModel):
     pass
